@@ -1,0 +1,98 @@
+# Filled example for a SaaS project (simple-signups.com). Values inferred from the repo on
+# 2026-11-08; confirm goal numbers, audience and voice with the owner before use.
+
+site:
+  name: Simple Signups
+  domain: simple-signups.com
+  base_url: https://simple-signups.com
+  trailing_slash: true
+  market: { country: GB, language: en } # OpenSEO project default (locationCode 2826)
+
+openseo:
+  project_id: 268b13e6-1398-48da-840a-e7f48c9bd5fd
+  weekly_credit_budget: 1500
+  rank_tracker_id: ''
+
+github:
+  repo: jabranr/simple-signups
+  base_branch: main
+  branch_prefix: seo/
+  max_open_review_prs: 5
+
+goal:
+  preset: saas
+  north_star: activated_account # account with first real subscriber
+  conversion_events: [signup, activated]
+  proxy_event: cta_click
+  attribution:
+    first_touch_recorded: false # no landing path stored on users yet
+    how_to_query: ''
+  cta:
+    primary_label: Get your endpoint free
+    primary_url: /signup
+    style: contextual
+
+audience:
+  who: developers, indie hackers and small agencies shipping static/JAMstack sites who need a verified subscriber list
+  not_who: people wanting a contact form that emails their inbox; people wanting a form builder or an email marketing suite
+  pains: [no backend for a static site, spam signups, double opt-in without Mailchimp, exporting a clean list]
+  reading_level_max_grade: 8
+
+voice:
+  tone: plain, direct, developer-friendly; show code; no hype
+  person: we/you
+  banned_phrases:
+    - '—'
+    - delve
+    - in today's fast-paced
+    - game-changer
+    - unlock the power
+    - seamless
+    - leverage
+    - it's important to note
+  brand_name_rule: First mention is "Simple Signups (simple-signups.com)" to avoid name collisions
+
+content:
+  format: tsx
+  dir: apps/web/src/content
+  new_page_steps: |
+    1. Add the post body to apps/web/src/content/blog.tsx and its metadata to blog-catalog.ts
+       (match an existing entry). Consider splitting posts into one file each first.
+    2. Update apps/web/src/content/blog.spec.ts expectations.
+    3. Prerender and sitemap pick it up from the catalog.
+  url_pattern: /blog/{slug}/
+  page_types: [guide, comparison, use-case, how-to]
+  min_words: 900
+  max_words: 2200
+  images:
+    source: Playwright screenshots of the live dashboard/docs, or apps/web/public/images
+    alt_text_required: true
+  internal_links_min: 3
+  must_link_to: [/docs/, /pricing/]
+
+facts:
+  sources:
+    - README.md
+    - packages/shared/src/plans.ts
+    - docs/living-spec/13-pricing.md
+    - apps/web/public/llms.txt
+    - /api/openapi.json
+  forbidden_claims: [customer counts, uptime guarantees, "GDPR certified"]
+
+build:
+  install: volta run npm ci
+  build: volta run npm run build
+  output_dir: apps/web/dist/client
+  test: volta run npm test
+  lint: volta run npm run lint
+
+competitors: [formspree.io, usebasin.com, web3forms.com, pleasehold.dev, getform.io, formcarry.com]
+
+weights:
+  page_type: { guide: 1.0, comparison: 1.0, use-case: 1.0, how-to: 1.0 }
+  topic_cluster: {}
+
+cadence:
+  new_pages_per_week: 2
+  refreshes_per_week: 3
+  qa_max_rounds: 3

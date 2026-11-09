@@ -1,0 +1,99 @@
+# seo.config.yaml — per-project settings for the Agentic SEO Kit.
+# Copy to the repo root. `seo-setup` fills most of this from the codebase and asks for the rest.
+# Business memory (overview, positioning, voice, competitors) ALSO lives in OpenSEO project context;
+# this file holds what the agents need to work inside the repo.
+
+site:
+  name: Example Site
+  domain: example.com
+  base_url: https://example.com
+  trailing_slash: true # canonical URL form; audit flags the other form
+  market: { country: GB, language: en } # should match the OpenSEO project defaults
+
+openseo:
+  project_id: '' # from list_projects
+  weekly_credit_budget: 1500 # agents stop and ask before exceeding this
+  rank_tracker_id: '' # filled by seo-setup
+
+github:
+  repo: owner/repo
+  base_branch: main
+  branch_prefix: seo/ # writer branches: seo/<issue-number>-<slug>
+  max_open_review_prs: 5 # research skips new briefs if more are waiting
+
+goal:
+  preset: saas # saas | local | content | personal  (see README → Goal presets)
+  north_star: activated_account # what success means for this project
+  conversion_events: [signup, activated] # names as recorded in your analytics/DB
+  proxy_event: cta_click # used until ~20 real conversions exist
+  attribution:
+    first_touch_recorded: false # true once landing path + referrer are stored on conversions
+    how_to_query: '' # e.g. "SQL on users.first_landing_path in D1" or "GET /api/admin/attribution"
+  cta:
+    primary_label: Get started free
+    primary_url: /signup
+    style: contextual # contextual | banner | inline
+
+audience:
+  who: '' # e.g. "indie devs and small agencies shipping static/JAMstack sites"
+  not_who: '' # wrong-ICP traffic to avoid, e.g. "people wanting a contact form to email inbox"
+  pains: []
+  reading_level_max_grade: 8
+
+voice:
+  tone: plain, direct, friendly; no hype
+  person: we/you
+  banned_phrases: # QA + seo-lint fail on these (case-insensitive)
+    - '—' # em dash
+    - delve
+    - in today's fast-paced
+    - game-changer
+    - unlock the power
+    - seamless
+    - leverage
+    - it's important to note
+  brand_name_rule: '' # e.g. "Always 'Simple Signups (simple-signups.com)' on first mention"
+
+content:
+  # Where pages live and how to add one. Writer follows this exactly.
+  format: mdx # md | mdx | tsx | html | astro | other
+  dir: src/content/blog
+  new_page_steps: |
+    1. Create src/content/blog/<slug>.mdx with the frontmatter shown in an existing post.
+    2. Nothing else; the sitemap and routes are generated.
+  url_pattern: /blog/{slug}/
+  page_types: [guide, comparison, use-case, how-to] # allowed types for briefs
+  min_words: 900
+  max_words: 2200
+  images: # where to get images; never invent screenshots of the product
+    source: 'repo screenshots in public/images or Playwright screenshots of the live site'
+    alt_text_required: true
+  internal_links_min: 3
+  must_link_to: [/pricing, /docs] # money pages every relevant page should link to
+
+facts:
+  # The ONLY sources for product facts. QA fails anything not traceable here or to a cited public URL.
+  sources:
+    - README.md
+    - docs/
+  forbidden_claims: [] # e.g. "GDPR certified", "#1", customer counts
+
+build:
+  install: npm ci
+  build: npm run build
+  output_dir: dist # seo-lint runs over this
+  test: npm test
+  lint: npm run lint
+  preview: npm run preview # optional, for screenshots
+
+competitors: [] # domains; mirrored into OpenSEO context
+
+weights:
+  # Updated monthly by seo-conversion (via PR). Research multiplies opportunity scores by these.
+  page_type: { guide: 1.0, comparison: 1.0, use-case: 1.0, how-to: 1.0 }
+  topic_cluster: {}
+
+cadence:
+  new_pages_per_week: 2
+  refreshes_per_week: 3
+  qa_max_rounds: 3
