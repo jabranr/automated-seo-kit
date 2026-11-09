@@ -75,7 +75,7 @@ automated-seo-kit/
    cp /tmp/seo-kit/templates/github/ISSUE_TEMPLATE/* .github/ISSUE_TEMPLATE/ && \
    cp /tmp/seo-kit/templates/github/seo-labels.json .github/ && \
    cp /tmp/seo-kit/scripts/seo-lint.mjs scripts/ && \
-   cp -n /tmp/seo-kit/seo.config.example.yaml seo.config.yaml && \
+   { [ -f seo.config.yaml ] || cp /tmp/seo-kit/seo.config.example.yaml seo.config.yaml; } && \
    rm -rf /tmp/seo-kit
    ```
 2. Copy `seo.config.example.yaml` to `seo.config.yaml` at the repo root (the one-liner does this
