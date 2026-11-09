@@ -1,5 +1,5 @@
-# Filled example for a SaaS project (simple-signups.com). Values inferred from the repo on
-# 2026-11-08; confirm goal numbers, audience and voice with the owner before use.
+# Filled example for a SaaS project (simple-signups.com). Identifiers are placeholders:
+# replace every <...> value with your own. Confirm goal, audience and voice with the owner.
 
 site:
   name: Simple Signups
@@ -9,12 +9,12 @@ site:
   market: { country: GB, language: en } # OpenSEO project default (locationCode 2826)
 
 openseo:
-  project_id: 268b13e6-1398-48da-840a-e7f48c9bd5fd
+  project_id: '<openseo-project-id>' # from list_projects
   weekly_credit_budget: 1500
   rank_tracker_id: ''
 
 github:
-  repo: jabranr/simple-signups
+  repo: <owner>/<repo>
   base_branch: main
   branch_prefix: seo/
   max_open_review_prs: 5
@@ -25,7 +25,7 @@ goal:
   conversion_events: [signup, activated]
   proxy_event: cta_click
   attribution:
-    first_touch_recorded: false # no landing path stored on users yet
+    first_touch_recorded: false # set true once landing path + referrer are stored on users
     how_to_query: ''
   cta:
     primary_label: Get your endpoint free
@@ -86,7 +86,7 @@ build:
   test: volta run npm test
   lint: volta run npm run lint
 
-competitors: [formspree.io, usebasin.com, web3forms.com, pleasehold.dev, getform.io, formcarry.com]
+competitors: ['<competitor-1.com>', '<competitor-2.com>', '<competitor-3.com>']
 
 weights:
   page_type: { guide: 1.0, comparison: 1.0, use-case: 1.0, how-to: 1.0 }

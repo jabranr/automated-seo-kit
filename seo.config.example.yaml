@@ -1,4 +1,4 @@
-# seo.config.yaml — per-project settings for the Agentic SEO Kit.
+# seo.config.yaml — per-project settings for the Automated SEO Kit.
 # Copy to the repo root. `seo-setup` fills most of this from the codebase and asks for the rest.
 # Business memory (overview, positioning, voice, competitors) ALSO lives in OpenSEO project context;
 # this file holds what the agents need to work inside the repo.

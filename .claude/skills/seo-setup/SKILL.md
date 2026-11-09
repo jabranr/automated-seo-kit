@@ -1,6 +1,6 @@
 ---
 name: seo-setup
-description: One-off onboarding of a repo into the Agentic SEO Kit. Use when asked to "run seo-setup", "set up agentic SEO", or "onboard this site to the SEO loop". Fills seo.config.yaml, syncs OpenSEO project context, creates GitHub labels and a rank tracker, and checks conversion tracking.
+description: One-off onboarding of a repo into the Automated SEO Kit. Use when asked to "run seo-setup", "set up automated SEO", "set up agentic SEO", or "onboard this site to the SEO loop". Fills seo.config.yaml, syncs OpenSEO project context, creates GitHub labels and a rank tracker, and checks conversion tracking.
 ---
 
 # seo-setup
